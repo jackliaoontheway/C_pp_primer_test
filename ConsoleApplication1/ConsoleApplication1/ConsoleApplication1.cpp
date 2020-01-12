@@ -7,7 +7,7 @@
 void chapter2();
 void chapter3();
 void chapter4();
-
+void chapter5();
 int main()
 {
     //chapter1();
@@ -20,6 +20,16 @@ std::string global_str;
 int global_int;
 int _global_x;
 
+void chapter5() {
+    int i = -1, & r = 0; // error, &r 必须指向左值， const &r 可以指向右值
+    int* const p2 = &i;
+    const int ci = -1, & r = 0;
+    const int* p1 = &i;
+    const int* const p3 = &i;
+
+    const int* const ps = &i;
+}
+
 void chapter4() {
     // int* ip, i, & r = i;
     // std::cout << r << std::endl; //-858993460
@@ -29,10 +39,34 @@ void chapter4() {
     std::cout << i << std::endl; //0
     std::cout << ip << std::endl; //xxx地址
 
-    const int buf; // const 修饰 必须初始化
-    int cnt = 0;
-    const int sz = cnt;
-    ++cnt; ++sz; // const 修饰 sz 不可变
+    //const int buf; // const 修饰 必须初始化
+    //int cnt = 0;
+    //const int sz = cnt;
+    //++cnt; ++sz; // const 修饰 sz 不可变
+    
+    const int c = 123;
+    // int& rc = c; // error
+    // rc = 1;
+
+    int c1 = 123;
+    const int &rc1 = c1; // 允许
+    c1 = 456;
+    //rc1 = 111; //error
+
+    std::cout << rc1 << std::endl;
+
+    const int& r2 = 42;// 常量引用的初始值可以是右值
+    //int& r3 = 42; // 非常量引用的初始值必须是左值 
+
+    double d = 3.14;
+    int di = d;
+    std::cout << di << std::endl;
+
+    const int& rdi = d;
+    std::cout << rdi << std::endl;
+    //int& rdi2 = d; // error
+    std::cout << rdi << std::endl;
+
 }
 
 void chapter3() {
